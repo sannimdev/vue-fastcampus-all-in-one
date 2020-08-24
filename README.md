@@ -20,3 +20,8 @@
 3. Vue.js 공식 문서 참고하며 학습
    - 한국어 지원
    - [가이드](https://kr.vuejs.org/v2/guide/)
+
+## Vue.js의 설치 방식
+
+1. CDN
+2. 직접 다운로드 받아 설치
