@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style type="text/css">
+      span.done {
+        text-decoration: line-through;
+        color: gray;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <my-todo-item v-for="todo in todos" v-bind:key="todo.id" v-bind:todo="todo"></my-todo-item>
+      </ul>
+      <!-- 이와 같이 컴포넌트화된 것은 재활용하여 사용할 수 있음. 단, 데이터의 구조는 동일해야 함! -->
+      <ul>
+        <my-todo-item v-for="todo in todos2" v-bind:key="todo.id" v-bind:todo="todo"></my-todo-item>
+      </ul>
+    </div>
+    <script>
+      Vue.component('my-todo-item', {
+        props: ['todo'],
+        //작은 따옴표는 줄바꿈을 인식하지 않는다.
+        template: `<li>
+          <input type="checkbox" v-model="todo.done" /><span v-bind:class="{done:todo.done}"
+            >{{todo.title}}</span
+          >
+        </li>`,
+      });
+
+      new Vue({
+        el: '#app',
+        data: {
+          todos: [
+            { id: 1, title: '아침 먹기', done: true },
+            { id: 2, title: '점심 먹기', done: false },
+            { id: 3, title: '저녁 먹기', done: true },
+            { id: 4, title: '간식 먹기', done: false },
+            { id: 5, title: '치킨 먹기', done: false },
+          ],
+          todos2: [{ id: 6, title: '잠자기', done: true }],
+        },
+      });
+    </script>
+  </body>
+</html>
