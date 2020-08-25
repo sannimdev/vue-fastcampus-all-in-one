@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style type="text/css">
+      .box {
+        width: 150px;
+        height: 150px;
+        background: royalblue;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.5s ease-in-out;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .box.active {
+        width: 400px;
+        background: tomato;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- toggle의 값(true or false)에 따라 active클래스를 부여할지를 결정함 -->
+      <div class="box" v-bind:class="{active:toggle}" v-on:click="toggleElement">
+        {{message}}
+      </div>
+      <button v-on:click="toggleElement">Toggle</button>
+      <input type="text" v-model="message" />
+    </div>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          message: '',
+          toggle: false,
+        },
+        methods: {
+          //   toggleElement: function () {
+          //   } 또는...
+          toggleElement() {
+            this.toggle = !this.toggle;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
