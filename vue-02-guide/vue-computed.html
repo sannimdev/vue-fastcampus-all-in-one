@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="todos">
+        <div v-for="todo in computedTodos" :key="todo.id">
+          <input type="checkbox" v-model="todo.done" />
+          <span>{{todo.title}}</span>
+        </div>
+      </div>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          todos: [
+            //id와 같이 식별할 수 있는 속성이 아무것도 없는 경우에는??? 가공을 어떻게 해야 할까?
+            //그것은 바로 computed라는 옵션이다.
+            //original todos => computedTodos (가공)
+            //original이 변경되면 computedTodos의 메서드가 호출되어 computedTodos도 바뀐다.
+            { title: '아침 먹기' },
+            { title: '점심 먹기' },
+            { title: '저녁 먹기' },
+          ],
+        },
+        computed: {
+          computedTodos() {
+            return this.todos.map((todo, index) => {
+              //   return Object.assign({}, todo, {
+              //     id: index + 1,
+              //     done: false,
+              //   });
+              // 또는 (후자는 ES6방법)
+              return {
+                ...todo,
+                id: index + 1,
+                done: false,
+              };
+            });
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
