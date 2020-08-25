@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div>{{msgA}}</div>
+      <div>{{msgB}}</div>
+      <button v-on:click="changeMessage">Change!</button>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          msgA: 'Message A.',
+          //   msgB: '', //반응성을 가지고자 한다면 빈 데이터라고 하더라도 선언할 것!
+        },
+        methods: {
+          changeMessage() {
+            this.msgA = 'Changed message A!';
+            //data객체에 정의되지 않았다. 그러므로 반응성을 가지지 않는다.
+            //따라서 화면에 버튼을 누를 때에서야 비로소 생성한다.
+            this.msgB = 'Changed message B!';
+            //이 메서드 외에 콘솔 창에서 임의로 msgA를 수정하더라도 화면에 출력되는 msgA는 실시간으로 반응성을 가지나,
+            //msgB를 임의로 수정할 때는 반응성을 가지지 않으므로 메시지가 화면에 반영되지 않는다.
+          },
+        },
+        computed: {}, //data는 정의된 데이터라면, computed는 계산된 데이터이다.
+        watch: {
+          msgA(newValue, oldValue) {
+            // msgA의 데이터가 변경될 때마다 이 메서드가 실행된다.
+            console.log(newValue, '| before=>', oldValue);
+          },
+        },
+        // template: ~, //컴포넌트 만들 때 사용
+
+        //라이프 사이클, 라이프 사이클 훅에 관한 것들...
+        // created(){},
+        // mounted(){},
+      });
+      console.log(vm);
+    </script>
+  </body>
+</html>
