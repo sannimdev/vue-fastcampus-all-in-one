@@ -7,5 +7,33 @@
     <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   </head>
-  <body></body>
+  <body>
+    <div id="app">
+      <ul>
+        <li v-for="item in items" v-bind:key="item.id">{{item.message}}</li>
+      </ul>
+    </div>
+    <script>
+      // v-for을 이용할 때는 데이터의 구조가 같아야 한다는 것을 전제로 함.
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          items: [
+            {
+              id: 1,
+              message: 'Hello World',
+            },
+            {
+              id: 2,
+              message: 'Good Job!',
+            },
+            {
+              id: 3,
+              message: 'My First Vue app',
+            },
+          ],
+        },
+      });
+    </script>
+  </body>
 </html>
