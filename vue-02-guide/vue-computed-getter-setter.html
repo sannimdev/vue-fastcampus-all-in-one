@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div>{{reversedMsg}}</div>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          msg: 'Hello Vue! 다시합창합시다',
+        },
+        computed: {
+          // reversedMsg(){
+          //     return this.msg.split('').reverse().join('');
+          // }
+          reversedMsg: {
+            //Arrow Function은 허용되지 않음.
+            //Getter
+            get: function () {
+              return this.msg.split('').reverse().join('');
+            },
+            //Setter
+            // Setter가 정의되지 않으면 vue.js:634 [Vue warn]: Computed property "reversedMsg" was assigned to but it has no setter. 경고가 발생한다.
+            set: function (newValue) {
+              this.msg = newValue; // this.msg의 값이 바뀌면서 computed의 getter 메서드가 실행될 것이다.
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
