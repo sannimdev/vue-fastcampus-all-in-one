@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 함수로 매번 연산하여 출력 -->
+      <div>{{reverseMsg()}}</div>
+      <div>{{reverseMsg()}}</div>
+      <div>{{this.msg.split('').reverse().join('')}}</div>
+      <hr />
+      <!-- 함수로 구현된 것처럼 보이지만 캐싱된 데이터가 사용된다고 보아야 한다. -->
+      <div>{{reversedMsg}}</div>
+      <div>{{reversedMsg}}</div>
+      <div>{{reversedMsg}}</div>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          msg: 'Hello Vue!',
+        },
+        computed: {
+          reversedMsg() {
+            console.log('computed 연산...');
+            return this.msg.split('').reverse().join('');
+          },
+        },
+        methods: {
+          reverseMsg() {
+            console.log('methods 연산');
+            //methods는 매번 연산을 해야 함.
+            return this.msg.split('').reverse().join('');
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
