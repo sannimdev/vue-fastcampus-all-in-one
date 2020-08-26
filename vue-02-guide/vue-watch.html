@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div>{{msg}}</div>
+      <div>{{reversedMsg}}</div>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          msg: 'Hello Vue!',
+        },
+        computed: {
+          reversedMsg: {
+            get() {
+              return this.msg.split('').reverse().join('');
+            },
+            set(newValue) {
+              this.msg = newValue;
+            },
+          },
+        },
+        watch: {
+          msg(newMsg) {
+            console.log('New msg:', newMsg);
+          },
+          //computed도 감시 가능
+          reversedMsg(newMsg) {
+            console.log('New reversedMsg: ', newMsg);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
