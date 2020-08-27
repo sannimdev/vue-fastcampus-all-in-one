@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style type="text/css">
+      .box {
+        width: 100px;
+        height: 100px;
+      }
+      .box--red {
+        background-color: red;
+      }
+      .box--blue {
+        background-color: blue;
+      }
+      .box--gray {
+        background-color: gray;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- v-if이외에도 v-else, v-else-if 디렉티브도 존재한다 -->
+      <div v-if="colorState === 'red'" class="box box--red"></div>
+      <div v-else-if="colorState === 'blue'" class="box box--blue"></div>
+      <!-- else의 경우에는 이외의 것이므로 조건이 필요하지 않다 -->
+      <div v-else class="box box--gray"></div>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          colorState: 'ddd',
+        },
+      });
+    </script>
+  </body>
+</html>
