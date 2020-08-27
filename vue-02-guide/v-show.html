@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style type="text/css">
+      .box {
+        width: 200px;
+        height: 150px;
+        background: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="toggle">Toggle</button>
+      <!-- v-if와 v-show와 다른 점?
+        v-if 속성으로 true/false를 전환하는 것은 Elements에서 태그가 숨겨질 때 완전히 요소에서 제거된다.
+        v-show 속성으로 true/false를 전환하면 Elements에서 사라지지 않고 숨겨질 때  style속성에서 display:none속성이 적용된다.
+        
+        v-if를 통해 토글하면 토글 비용이 높다.
+        토글 비용이 높다? => 요소가 새로 생기고 사라지고를 반복하다 보면 렌더링하는 부담이 증가하게 된다.
+        
+        v-show를 통해 톡틀하면 초기 렌더링 비용이 높다.
+        초기 렌더링 비용이 높다? => true/false와 관계없이 렌더링하기 때문.
+        숨겨진 상태에서는 CSS에서 display:none;이 적용됐을 뿐이니까 일단 렌더링을 해두기는 한다.
+      -->
+      <div class="box" v-show="show"></div>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          show: true,
+        },
+        methods: {
+          toggle() {
+            this.show = !this.show;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
