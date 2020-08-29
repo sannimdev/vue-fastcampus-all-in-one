@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style type="text/css"></style>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="pushTodo">푸시</button>
+      <ul class="todos">
+        <li v-for="(todo, index) in todos" :key="index">{{todo.title}}</li>
+      </ul>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          todos: [{ title: '아침 먹기' }, { title: '점심 먹기' }, { title: '저녁 먹기' }],
+        },
+        methods: {
+          pushTodo() {
+            // this.todos[3] = { title: '야식 먹기' };
+            // 실제적으로는 data에는 추가되지만 반응성에 영향을미치지 않으므로 배열 내장함수를 이용해서 추가해줘야 한다.
+            //그러므로 할당연산자를 이용하는 것이 아니라 변이 메서드를 이용해야 한다.
+            //push, pop, shift, unshift, splice, sort, reverse
+            this.todos.push({ title: '야식 먹기' });
+            this.todos = [
+              ...this.todos.splice(0, 1),
+              { title: '치카하기' },
+              ...this.todos.splice(1),
+            ];
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
