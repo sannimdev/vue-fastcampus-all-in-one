@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+      .parent {
+        width: 200px;
+        height: 200px;
+        background: blue;
+      }
+      .child {
+        width: 100px;
+        height: 100px;
+        background: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 기본적으로 이벤트 버블링이 발생 -->
+      <!-- .capture를 적용하면 버블링이 발생했을 때 우선 발생 -->
+      <!-- <div class="parent" @click.capture="clickHandler"> -->
+      <!-- .self를 적용하면 child영역에서 클릭하여도 클릭이벤트가 발생하지 않음 -->
+      <div class="parent" @click.self="clickHandler">
+        <!-- .stop 수식어를 이용하여 이벤트버블링 막기 -->
+        <!-- <div class="child" @click.stop="clickHandler"></div> -->
+        <!-- <div class="child" @click="clickHandler"></div> -->
+        <div class="child"></div>
+      </div>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {},
+        methods: {
+          clickHandler(event) {
+            console.log('이벤트 발생', event.currentTarget.className);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
