@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 단방향 데이터로서의 바인딩 -->
+      <!-- <input type="text" :value="message"/> -->
+      <!-- 양방향 데이터 바인딩:  message의 내용까지 변경하고 싶다면 v-model로 바인딩  -->
+      <!-- 그러나 한글을 사용하여 양방향 데이터 바인딩을 할 경우 한 글자씩 박자가 늦기 때문에 실시간으로 한글 입력을 제어하고 싶다면 v-model은 다소 부적절 -->
+      <!-- <input type="text" v-model="message" /> -->
+      <!-- 실시간으로 입력하는 한글을 계속 바인딩하고자 한다면 다음의 방법을 사용하면 된다. -->
+      <!-- <input type="text" @input="message = $event.target.value" /> -->
+      <!-- 또는... methods에서 메서드를 구현하여 호출하여 사용하여도 된다.-->
+      <input type="text" @input="bindMessage" :value="message" />
+      <p>{{message}}</p>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          message: 'Hello~',
+        },
+        methods: {
+          bindMessage(event) {
+            this.message = event.target.value;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
