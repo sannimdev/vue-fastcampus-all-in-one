@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- keydown의 수식어인 enter를 사용하면 엔터를 치는 경우에만 이벤트를 호출한다. -->
+      <!-- <input type="text" @keydown.enter="keyDownHandler" /> -->
+      <!-- 체이닝.... 아래의 코드에서는 ctrl키를 누르고 엔터 키를 눌러야 이벤트가 호출된다. -->
+      <!-- 이러한 키 제어 이벤트를 구현하는 것도 방법이지만, 시간이 걸리고 생각보다 복잡하기 때문에 Vue에서 지원하는 수식어를 사용할 것을 권장 -->
+      <input type="text" @keydown.ctrl.enter="keyDownHandler" />
+    </div>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {},
+        methods: {
+          keyDownHandler(e) {
+            // if (e.keyCode === 13) {
+            console.log('Done!');
+            // }
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
