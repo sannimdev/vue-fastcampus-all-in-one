@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <my-comp :msg="message"></my-comp> -->
+      <!-- required:true로 설정된 경우 다음과 같이 경고가 발생한다.
+        vue.js:634 [Vue warn]: Missing required prop: "msg" -->
+      <!-- <my-comp></my-comp> -->
+      <!-- HTML은 케밥케이스,  JS는 카멜케이스임에 유의한다 -->
+      <my-comp :my-msg="message"></my-comp>
+    </div>
+    <script>
+      Vue.component('my-comp', {
+        template: '<div>{{ myMsg }}</div>',
+        //msg가 가지고 있을 기본적인 옵션을 가지기 위해서는 props를 배열이 아닌 객체로 만들어야 한다.
+        // props: ["msg"]
+        props: {
+          // msg: String,
+          // msg: {
+          myMsg: {
+            // type: String,
+            type: [String, Number], //문자나 숫자가 넘어올 수 있는 경우
+            //데이터가 넘어오지 않은 경우 가지게 될 기본값
+            default: 'Default!!!',
+            required: true, // 필수 속성인지의 여부
+            validator: function (value) {
+              // 유효성 체크
+              //일치하지 않으면 Invalid prop 경고가 발생한다.
+              return value === 'Hello';
+            },
+          },
+        },
+      });
+      const vm = new Vue({
+        el: '#app',
+        data() {
+          return {
+            message: 'Hello',
+          };
+        },
+      });
+    </script>
+  </body>
+</html>
