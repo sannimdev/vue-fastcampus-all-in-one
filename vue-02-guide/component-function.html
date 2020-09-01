@@ -1,0 +1,57 @@
+<!-- https://kr.vuejs.org/v2/guide/components.html#data-%EB%8A%94-%EB%B0%98%EB%93%9C%EC%8B%9C-%ED%95%A8%EC%88%98%EC%97%AC%EC%95%BC%ED%95%A9%EB%8B%88%EB%8B%A4 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app1">
+      <my-component />
+    </div>
+    <div id="app2">
+      <my-comp />
+      <myComp />
+    </div>
+    <script>
+      const myComp = {
+        template: '<div class="me">{{message}}</div>',
+        // data: {}, // 컴포넌트를 만들 때는 data를 직접 만들어 할당하는 방식을 사용해서는 안 된다.
+        //반드시 아래처럼 함수를 정의해서 객체를 반환하도록 설정해야 한다.
+        /*
+          1. 컴포넌트 자체가 객체처럼 재생성하여 사용하는 점에서 여러 번 사용된다는 것을 생각해 본다.
+          2. 그렇다면 제공되는 데이터의 셋은 생성된 객체별로 가지고 있어야 한다.
+          3. 그런데 데이터를 함수형이 아니라 직접 할당하게 된다면 Object형의 경우에는 단 한 번만 생성된다.
+          4. 그러므로 모 컴포넌트가 3번 생성되어 사용된다고 했을 때 이 3개의 컴포넌트가 단 한 개의 데이터셋을 공유하여 사용한다.
+          5. 이 경우 1개의 컴포넌트가 데이터를 변경하면 나머지 컴포넌트에도 영향을 끼치게 된다.
+          6. 따라서 함수형을 사용하여 컴포넌트가 데이터를 참조할 때마다 객체를 생성하는 방식으로 사용하도록 한다. 
+        */
+        data: function () {
+          // data(){
+          return {
+            message: 'Hello Vue!',
+          };
+        },
+      };
+
+      const vm1 = new Vue({
+        el: '#app1', //지역등록하기
+        components: {
+          //my-component는 vm1의 뷰에서만 등록되었으므로 #app1 내에서만 사용이 가능하다.
+          'my-component': myComp,
+        },
+      });
+      const vm2 = new Vue({
+        el: '#app2',
+        //컴포넌트가 등록되어있지 않으면 사용할 수 없다.
+        //vue.js:634 [Vue warn]: Unknown custom element: <my-component> - did you register the component correctly? For recursive components, make sure to provide the "name" option.
+        components: {
+          'my-comp': myComp,
+        },
+      });
+    </script>
+  </body>
+</html>
