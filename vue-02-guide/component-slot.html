@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 컴포넌트로 컴포넌트 안의 children요소를 삽입할 경우도 있을 것이다.
+      그러나 컴포넌트 사이의 children은 기본적으로 아무것도 출력해주지 않는다.
+    이를 출력하기 위해서는 slot을 이용한다.-->
+      <my-comp>
+        <!-- 이름이 있는 슬롯에 삽입하는 방법 -->
+        <!-- <template slot-scope="myProps"> {{myProps.mySlotData}} </template> -->
+        <template slot-scope="{mySlotData}"> {{mySlotData}} </template>
+        <div slot="slot1">Hi Slot1!</div>
+        <!-- <input type="text" /> -->
+      </my-comp>
+    </div>
+    <script>
+      Vue.component('my-comp', {
+        //slot 사이에 든 값은 컴포넌트 사이의 값이 없는 경우 기본 값으로 출력되는 부분이다.
+        // template: '<div><slot>대체 콘텐츠</slot></div>',
+        //콘텐츠 순서는 슬롯을 어떻게 정의하느냐에 따라 달라질 수 있다.
+        template: '<div><slot :my-slot-data="message"></slot><slot name="slot1"></slot></div>',
+        data() {
+          return {
+            message: 'Hello Slot!~!@!@!@?',
+          };
+        },
+      });
+      const vm = new Vue({
+        el: '#app',
+      });
+    </script>
+  </body>
+</html>
