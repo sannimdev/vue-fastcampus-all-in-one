@@ -1,11 +1,12 @@
 const path = require('path'); //nodejs에서 path모듈 자체를 제공하므로 경로를 명시할 필요는 없음
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+require('@babel/polyfill');
 
 module.exports = {
   //진입점 (entry)
   //프로젝트가 돌아가기 위해 가장 먼저 실행되어야 하는 파일
   entry: {
-    app: path.join(__dirname, 'main.js'),
+    app: ['@babel/polyfill', path.join(__dirname, 'main.js')],
   },
   //결과물에 대한 설정
   output: {
