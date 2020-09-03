@@ -2,6 +2,9 @@ const path = require('path'); //nodejs에서 path모듈 자체를 제공하므�
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+//destructuring
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
 require('@babel/polyfill');
 
 module.exports = {
@@ -58,6 +61,8 @@ module.exports = {
         },
       ],
     }),
+    //output에 설정한 경로를 삭제하고 시작
+    new CleanWebpackPlugin(),
   ],
 };
 //웹팩은 nodejs 런타임에서 실행
