@@ -1,5 +1,6 @@
 const path = require('path'); //nodejs에서 path모듈 자체를 제공하므로 경로를 명시할 필요는 없음
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 require('@babel/polyfill');
 
 module.exports = {
@@ -36,7 +37,13 @@ module.exports = {
     /////
   },
   // plugins만 복수형
-  plugins: [new VueLoaderPlugin()],
+  plugins: [
+    new VueLoaderPlugin(),
+    //dist폴더에 합쳐줄 것임
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'index.html'),
+    }),
+  ],
 };
 //웹팩은 nodejs 런타임에서 실행
 
