@@ -4,6 +4,7 @@
   "description": "- Vue CLI 미사용\r   - 프로젝트가 어떻게 동작하는지 이해하기 위함\r - Heroppy 강좌 수강\r - [Vue Todo list app](https://github.com/heropcode/vue-todo-app)",
   "main": "index.js",
   "scripts": {
+    "dev": "webpack-dev-server --mode development",
     "build": "webpack --mode production"
   },
   "keywords": [
@@ -24,7 +25,8 @@
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.6.12",
     "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
     "@babel/polyfill": "^7.11.5",

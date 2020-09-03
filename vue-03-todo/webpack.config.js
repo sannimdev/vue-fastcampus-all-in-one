@@ -64,6 +64,28 @@ module.exports = {
     //output에 설정한 경로를 삭제하고 시작
     new CleanWebpackPlugin(),
   ],
+  //개발용 웹팩 서버
+  devServer: {
+    //npm run dev를 실행할 때 바로 브라우저를 오픈하여 실행하겠다는 의미.
+    open: false,
+    //HMR(수정사항이 바로 반영되어 브라우저에서 바로 확인할 수 있음, hot은 기본값이 true이다.)
+    hot: true,
+  },
+  //webpack 옵션. devserver와는 관계없음
+  /*
+  devtool: eval
+  빌드시간을 최대한 축소하고 디버깅이 가능한 방식으로 생성
+  개발용으로 적합
+  그러나 파일의 용량이 커질 수 있음
+  devtool: cheap-modeul-source-map
+  용량의 최소화, 제품화할 때 가장 좋은 옵션
+  그러나 디버깅하기가 어렵다는 단점을 지님
+  */
+  devtool: 'eval',
+  /*
+  분명히 개발용, 배포용의 옵션은 다를 것이다.
+  이러한 옵션을 따로 두어 병합해 두는 방법이 있다. (다음 시간에...)
+  */
 };
 //웹팩은 nodejs 런타임에서 실행
 
