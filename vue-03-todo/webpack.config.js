@@ -1,6 +1,7 @@
 const path = require('path'); //nodejs에서 path모듈 자체를 제공하므로 경로를 명시할 필요는 없음
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 require('@babel/polyfill');
 
 module.exports = {
@@ -42,6 +43,20 @@ module.exports = {
     //dist폴더에 합쳐줄 것임
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'index.html'),
+    }),
+    new CopyPlugin({
+      /*
+      강의내용과 다른 부분. 업데이트가 되었나 봄.
+      CopyPlugin에 객체가 있고
+      그 안에 patterns라는 항목 안에 배열의 원소로서  from, to가 담긴객체가 존재함
+      */
+      patterns: [
+        {
+          from: 'assets/',
+          //'' 빈 문자열 값은 루트 디렉터리 값을 의미함
+          to: '',
+        },
+      ],
     }),
   ],
 };

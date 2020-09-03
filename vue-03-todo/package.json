@@ -4,7 +4,7 @@
   "description": "- Vue CLI 미사용\r   - 프로젝트가 어떻게 동작하는지 이해하기 위함\r - Heroppy 강좌 수강\r - [Vue Todo list app](https://github.com/heropcode/vue-todo-app)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --mode production"
   },
   "keywords": [
     "vue",
@@ -16,6 +16,7 @@
     "@babel/core": "^7.11.5",
     "@babel/preset-env": "^7.11.5",
     "babel-loader": "^8.1.0",
+    "copy-webpack-plugin": "^6.1.0",
     "css-loader": "^4.2.2",
     "html-webpack-plugin": "^4.4.1",
     "vue-loader": "^15.9.3",
