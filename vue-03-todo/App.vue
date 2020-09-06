@@ -1,10 +1,10 @@
 <template>
-  <h1 class="red">{{ msg }}</h1>
+  <h1>{{ msg }}</h1>
 </template>
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       msg: 'Hello Vue.',
     };

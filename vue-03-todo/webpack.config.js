@@ -3,17 +3,18 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const { merge } = require('webpack-merge'); // merge가 아니라 {merge}
-//destructuring
+/*
+destructuring
+*/
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 require('@babel/polyfill');
 
 module.exports = {};
-//웹팩은 nodejs 런타임에서 실행
-
-/* 
+/*
+웹팩은 nodejs 런타임에서 실행
+ 
 주의사항
-
 ERROR in ./App.vue?vue&type=style&index=0&id=472cff63&scoped=true&lang=css& (./node_modules/vue-loader/lib??vue-loader-options!./App.vue?vue&type=style&index=0&id=472cff63&scoped=true&lang=css&) 16:3
 Module parse failed: Unexpected token (16:3)
 File was processed with these loaders:
@@ -39,8 +40,10 @@ You may need an additional loader to handle the result of these loaders.
   devtool: cheap-modeul-source-map
   용량의 최소화, 제품화할 때 가장 좋은 옵션
   그러나 디버깅하기가 어렵다는 단점을 지님
+  
+  ===
+  환경변수와 옵션(개발용인지 배포용인지)
 */
-//환경변수와 옵션(개발용인지 배포용인지)
 module.exports = (env, opts) => {
   const config = {
     //중복되는 옵션 정의
