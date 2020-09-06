@@ -44,6 +44,9 @@ You may need an additional loader to handle the result of these loaders.
 module.exports = (env, opts) => {
   const config = {
     //중복되는 옵션 정의
+    resolve: {
+      extensions: ['.vue', '.js'],
+    },
     //진입점 (entry)
     //프로젝트가 돌아가기 위해 가장 먼저 실행되어야 하는 파일
     entry: {

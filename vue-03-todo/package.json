@@ -2,6 +2,10 @@
   "name": "vue-03-todo",
   "version": "1.0.0",
   "description": "- Vue CLI 미사용\r   - 프로젝트가 어떻게 동작하는지 이해하기 위함\r - Heroppy 강좌 수강\r - [Vue Todo list app](https://github.com/heropcode/vue-todo-app)",
+  "repository":{
+    "type":"git",
+    "url":"https://github.com/sannimdev/vue-fastcampus-all-in-one"
+  },
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --mode development",

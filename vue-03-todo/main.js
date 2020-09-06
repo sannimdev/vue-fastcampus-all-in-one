@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import App from './App.vue';
+import App from './App'; //App.vue에서 확장자 생략 설정(webpack.config.js에서 resolve객체 참조)
 
 new Vue({
   el: '#app',
