@@ -2,7 +2,7 @@ const path = require('path'); //nodejs에서 path모듈 자체를 제공하므�
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge'); // merge가 아니라 {merge}
 //destructuring
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -71,7 +71,11 @@ module.exports = (env, opts) => {
         },
         {
           test: /\.css$/,
-          use: ['vue-style-loader', 'css-loader'],
+          use: ['vue-style-loader', 'css-loader', 'postcss-loader'],
+        },
+        {
+          test: /\.scss$/,
+          use: ['vue-style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
         },
       ],
       /////
