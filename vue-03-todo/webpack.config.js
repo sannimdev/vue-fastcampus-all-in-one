@@ -77,11 +77,20 @@ module.exports = (env, opts) => {
         },
         {
           test: /\.css$/,
-          use: ['vue-style-loader', 'css-loader', 'postcss-loader'],
+          use: [
+            'vue-style-loader', // 1st
+            'css-loader', // 2nd
+            'postcss-loader', // 3rd
+          ],
         },
         {
           test: /\.scss$/,
-          use: ['vue-style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
+          use: [
+            'vue-style-loader', // 1st
+            'css-loader', // 2nd
+            'postcss-loader', // 3rd
+            'sass-loader', // 4th
+          ],
         },
       ],
       /////
