@@ -1,7 +1,14 @@
 <template>
   <div>
-    <TodoItem />
-    <TodoCreator />
+    <TodoItem
+      v-for="todo in todos"
+      :key="todo.id"
+      :todo="todo"
+      @update-todo="updateTodo"
+      @delete-todo="deleteTodo"
+    />
+    <hr />
+    <TodoCreator @create-todo="createTodo" />
   </div>
 </template>
 
@@ -9,7 +16,7 @@
 import lowdb from "lowdb";
 import LocalStorage from "lowdb/adapters/LocalStorage";
 import cryptoRandomString from "crypto-random-string";
-
+import _cloneDeep from "lodash/cloneDeep";
 import TodoCreator from "./TodoCreator";
 import TodoItem from "./TodoItem";
 
@@ -21,6 +28,7 @@ export default {
   data() {
     return {
       db: null,
+      todos: [],
     };
   },
   created() {
@@ -31,12 +39,20 @@ export default {
       const adapter = new LocalStorage("todo-app"); //DB 이름
       //db와 어댑터 연결
       this.db = lowdb(adapter); //?
-      //Local DB 초기화
-      this.db
-        .defaults({
-          todos: [], //Collection
-        })
-        .write();
+
+      console.log(this.db);
+      const hasTodos = this.db.has("todos").value();
+
+      if (hasTodos) {
+        this.todos = _cloneDeep(this.db.getState().todos);
+      } else {
+        //LocalDB 초기화
+        this.db
+          .defaults({
+            todos: [], //Collection
+          })
+          .write();
+      }
     },
     createTodo(title) {
       const newTodo = {
@@ -50,6 +66,12 @@ export default {
       //get과 push는 lodash에서 제공하는 메서드
       //write는 lowdb에서 제공하는 메서드로 실제 db에 변경사항을 반영하고자 한다면 꼭 호출해야
       this.db.get("todos").push(newTodo).write();
+    },
+    updateTodo() {
+      console.log("updateTodo");
+    },
+    deleteTodo() {
+      console.log("deleteTodo");
     },
   },
 };
