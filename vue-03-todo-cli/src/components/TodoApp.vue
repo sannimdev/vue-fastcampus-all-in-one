@@ -40,10 +40,10 @@ export default {
       //db와 어댑터 연결
       this.db = lowdb(adapter); //?
 
-      console.log(this.db);
       const hasTodos = this.db.has("todos").value();
 
       if (hasTodos) {
+        //DB의 모든 내용을 복사 (Deep)
         this.todos = _cloneDeep(this.db.getState().todos);
       } else {
         //LocalDB 초기화
