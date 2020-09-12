@@ -17,6 +17,8 @@ import lowdb from "lowdb";
 import LocalStorage from "lowdb/adapters/LocalStorage";
 import cryptoRandomString from "crypto-random-string";
 import _cloneDeep from "lodash/cloneDeep";
+import _find from "lodash/find";
+import _assign from "lodash/assign";
 import TodoCreator from "./TodoCreator";
 import TodoItem from "./TodoItem";
 
@@ -66,9 +68,15 @@ export default {
       //get과 push는 lodash에서 제공하는 메서드
       //write는 lowdb에서 제공하는 메서드로 실제 db에 변경사항을 반영하고자 한다면 꼭 호출해야
       this.db.get("todos").push(newTodo).write();
+
+      //Create Client
+      this.todos.push(newTodo);
     },
-    updateTodo() {
-      console.log("updateTodo");
+    updateTodo(todo, value) {
+      this.db.get("todos").find({ id: todo.id }).assign(value).write();
+
+      const foundTodo = _find(this.todos, { id: todo.id });
+      _assign(foundTodo, value);
     },
     deleteTodo() {
       console.log("deleteTodo");
