@@ -19,6 +19,8 @@ import cryptoRandomString from "crypto-random-string";
 import _cloneDeep from "lodash/cloneDeep";
 import _find from "lodash/find";
 import _assign from "lodash/assign";
+// import _remove from "lodash/remove";
+import _findIndex from "lodash/findIndex";
 import TodoCreator from "./TodoCreator";
 import TodoItem from "./TodoItem";
 
@@ -78,8 +80,16 @@ export default {
       const foundTodo = _find(this.todos, { id: todo.id });
       _assign(foundTodo, value);
     },
-    deleteTodo() {
-      console.log("deleteTodo");
+    deleteTodo(todo) {
+      //DB에서 삭제
+      this.db.get("todos").remove({ id: todo.id }).write();
+
+      //lodash의 remove는 반응성을 가지지 못한다.
+      // _remove(this.todos, { id: todo.id });
+
+      //Index값을 찾은 후 이를 바탕으로 원소 지우기
+      const foundIndex = _findIndex(this.todos, { id: todo.id });
+      this.$delete(this.todos, foundIndex);
     },
   },
 };
