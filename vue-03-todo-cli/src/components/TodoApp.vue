@@ -8,7 +8,7 @@
       </div>
       <div class="actions">
         <input type="checkbox" v-model="allDone" />
-        <button>완료된 항목 삭제</button>
+        <button @click="clearCompleted">완료된 항목 삭제</button>
       </div>
     </div>
     <div class="todo-app__list">
@@ -151,6 +151,28 @@ export default {
       //Local Todos
       // this.todos.forEach((todo) => (todo.done = checked));
       this.todos = _cloneDeep(newTodos);
+    },
+    clearCompleted() {
+      //DB에 반영
+      //배열을 삭제할 때 앞에서부터 삭제하면 당겨지므로 정상적으로 원하는 아이템을 삭제할 수 없을 수도 있다.
+      //따라서 맨 뒤에서부터 삭제한다면 원활하게 삭제를 할 수 있겠지? (오.....)
+      // this.todos.forEach((todo) => {
+      //   if (todo.done) {
+      //     this.deleteTodo(todo);
+      //   }
+      // });
+      //TODO: Reduce 복습하기
+      this.todos
+        .reduce((list, todo, index) => {
+          if (todo.done) {
+            list.push(index); //지워야 하는 index값만 보관하고 지우고자 함.
+          }
+          return list;
+        }, [])
+        .reverse()
+        .forEach((index) => {
+          this.deleteTodo(this.todos[index]);
+        });
     },
   },
 };
