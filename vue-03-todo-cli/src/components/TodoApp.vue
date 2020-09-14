@@ -34,6 +34,7 @@ import _find from "lodash/find";
 import _assign from "lodash/assign";
 // import _remove from "lodash/remove";
 import _findIndex from "lodash/findIndex";
+import _forEachRight from "lodash/forEachRight";
 import TodoCreator from "./TodoCreator";
 import TodoItem from "./TodoItem";
 
@@ -161,18 +162,27 @@ export default {
       //     this.deleteTodo(todo);
       //   }
       // });
+
+      //#1. Native (Reduce with reverse)
       //TODO: Reduce 복습하기
-      this.todos
-        .reduce((list, todo, index) => {
-          if (todo.done) {
-            list.push(index); //지워야 하는 index값만 보관하고 지우고자 함.
-          }
-          return list;
-        }, [])
-        .reverse()
-        .forEach((index) => {
-          this.deleteTodo(this.todos[index]);
-        });
+      // this.todos
+      //   .reduce((list, todo, index) => {
+      //     if (todo.done) {
+      //       list.push(index); //지워야 하는 index값만 보관하고 지우고자 함.
+      //     }
+      //     return list;
+      //   }, [])
+      //   .reverse()
+      //   .forEach((index) => {
+      //     this.deleteTodo(this.todos[index]);
+      //   });
+
+      //#2. lodash
+      _forEachRight(this.todos, (todo) => {
+        if (todo.done) {
+          this.deleteTodo(todo);
+        }
+      });
     },
   },
 };
