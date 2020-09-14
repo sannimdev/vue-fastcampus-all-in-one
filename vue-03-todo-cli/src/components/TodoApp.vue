@@ -187,3 +187,7 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+@import "../scss/style"; /*SCSS Partials*/
+</style>
