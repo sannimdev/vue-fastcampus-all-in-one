@@ -1,6 +1,8 @@
 <template>
   <div>
-    <button @click="createTodo">추가</button>
+    <button @click="createTodo">
+      <i class="material-icons">add</i>
+    </button>
     <input
       type="text"
       :value="title"
@@ -30,6 +32,11 @@ export default {
       }
       this.$emit("create-todo", this.title);
       this.title = "";
+
+      this.$nextTick(() => {
+        //렌더링되는 시간을 기다려준다.
+        window.scrollTo(0, document.body.scrollHeight);
+      });
     },
   },
 };
