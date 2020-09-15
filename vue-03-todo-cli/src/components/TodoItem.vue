@@ -10,12 +10,21 @@
         @keypress.esc="offEditMode"
       />
       <div class="item__actions">
-        <button key="complete" @click="editedTodo">완료</button>
-        <button key="cancel" @click="offEditMode">취소</button>
+        <button class="btn btn--primary" key="complete" @click="editedTodo">
+          <i class="material-icons">done</i>
+        </button>
+        <button class="btn" key="cancel" @click="offEditMode">
+          <i class="material-icons">clear</i>
+        </button>
       </div>
     </div>
     <div v-if="!isEditMode" class="item__inner item--normal">
-      <input type="checkbox" v-model="done" @change="updateTodo" />
+      <label>
+        <input type="checkbox" v-model="done" @change="updateTodo" />
+        <span class="icon">
+          <i class="material-icons">check</i>
+        </span>
+      </label>
       <div class="item__title-wrap">
         <div class="item__title">{{todo.title}}</div>
         <div class="item__date">{{date}}</div>
@@ -24,8 +33,12 @@
         <!-- 돔이 갱신될 때 button의 구조가 같다면 완료를 수정버튼으로 인식할 수 있는 등의 불상사 발생
         DOM을 매번 갱신하면 성능효율이 떨어지므로 선택한 것으로 뷰에 다른 요소의 버튼이라는 것을 인식시켜줘야 한다.
         key속성을 이용하여 식별할 수 있도록 한다.-->
-        <button key="update" @click="onEditMode">수정</button>
-        <button key="delete" @click="deleteTodo">삭제</button>
+        <button class="btn" key="update" @click="onEditMode">
+          <i class="material-icons">edit</i>
+        </button>
+        <button class="btn btn--danger" key="delete" @click="deleteTodo">
+          <i class="material-icons">delete</i>
+        </button>
       </div>
     </div>
   </div>
@@ -100,21 +113,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-/* scoped : 현재 컴포넌트 내의 속성에만 적용이 필요할 떄 선언 */
-.todo-item {
-  margin-bottom: 10px;
-  .item__inner {
-    display: flex;
-  }
-  .item__date {
-    font-size: 12px;
-  }
-  &.done {
-    .item__title {
-      text-decoration: line-through;
-    }
-  }
-}
-</style>

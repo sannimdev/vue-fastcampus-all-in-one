@@ -2,9 +2,15 @@
   <div class="todo-app">
     <div class="todo-app__actions">
       <div class="filters">
-        <button @click="changeFilter('all')">모든 항목 ({{total}})</button>
-        <button @click="changeFilter('active')">해야 할 항목({{activeCount}})</button>
-        <button @click="changeFilter('completed')">완료된 항목({{completedCount}})</button>
+        <button :class="{ active: filter === 'all' }" @click="changeFilter('all')">모든 항목 ({{total}})</button>
+        <button
+          :class="{ active: filter === 'active' }"
+          @click="changeFilter('active')"
+        >해야 할 항목({{activeCount}})</button>
+        <button
+          :class="{ active: filter === 'completed' }"
+          @click="changeFilter('completed')"
+        >완료된 항목({{completedCount}})</button>
       </div>
       <div class="actions">
         <input type="checkbox" v-model="allDone" />
