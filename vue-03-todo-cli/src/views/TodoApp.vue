@@ -2,15 +2,24 @@
   <div class="todo-app">
     <div class="todo-app__actions">
       <div class="filters">
-        <button :class="{ active: filter === 'all' }" @click="changeFilter('all')">모든 항목 ({{total}})</button>
+        <button
+          :class="{ active: filter === 'all' }"
+          @click="changeFilter('all')"
+        >
+          모든 항목 ({{ total }})
+        </button>
         <button
           :class="{ active: filter === 'active' }"
           @click="changeFilter('active')"
-        >해야 할 항목({{activeCount}})</button>
+        >
+          해야 할 항목({{ activeCount }})
+        </button>
         <button
           :class="{ active: filter === 'completed' }"
           @click="changeFilter('completed')"
-        >완료된 항목({{completedCount}})</button>
+        >
+          완료된 항목({{ completedCount }})
+        </button>
       </div>
       <div class="actions clearfix">
         <div class="float--left">
@@ -48,18 +57,18 @@
 </template>
 
 <script>
-import lowdb from "lowdb";
-import LocalStorage from "lowdb/adapters/LocalStorage";
-import cryptoRandomString from "crypto-random-string";
-import _cloneDeep from "lodash/cloneDeep";
-import _find from "lodash/find";
-import _assign from "lodash/assign";
+import lowdb from 'lowdb';
+import LocalStorage from 'lowdb/adapters/LocalStorage';
+import cryptoRandomString from 'crypto-random-string';
+import _cloneDeep from 'lodash/cloneDeep';
+import _find from 'lodash/find';
+import _assign from 'lodash/assign';
 // import _remove from "lodash/remove";
-import _findIndex from "lodash/findIndex";
-import _forEachRight from "lodash/forEachRight";
-import scrollTo from "scroll-to";
-import TodoCreator from "./TodoCreator";
-import TodoItem from "./TodoItem";
+import _findIndex from 'lodash/findIndex';
+import _forEachRight from 'lodash/forEachRight';
+import scrollTo from 'scroll-to';
+import TodoCreator from '@/components/TodoCreator';
+import TodoItem from '@/components/TodoItem';
 
 export default {
   components: {
@@ -70,19 +79,19 @@ export default {
     return {
       db: null,
       todos: [],
-      filter: "all",
+      filter: 'all',
     };
   },
   computed: {
     filteredTodos() {
-      console.log("filteredTodos 호출");
+      console.log('filteredTodos 호출');
       switch (this.filter) {
-        case "all":
+        case 'all':
         default:
           return this.todos;
-        case "active":
+        case 'active':
           return this.todos.filter((todo) => !todo.done);
-        case "completed":
+        case 'completed':
           return this.todos.filter((todo) => todo.done);
       }
     },
@@ -109,11 +118,11 @@ export default {
   },
   methods: {
     initDB() {
-      const adapter = new LocalStorage("todo-app"); //DB 이름
+      const adapter = new LocalStorage('todo-app'); //DB 이름
       //db와 어댑터 연결
       this.db = lowdb(adapter); //?
 
-      const hasTodos = this.db.has("todos").value();
+      const hasTodos = this.db.has('todos').value();
 
       if (hasTodos) {
         //DB의 모든 내용을 복사 (Deep)
@@ -138,20 +147,30 @@ export default {
 
       //get과 push는 lodash에서 제공하는 메서드
       //write는 lowdb에서 제공하는 메서드로 실제 db에 변경사항을 반영하고자 한다면 꼭 호출해야
-      this.db.get("todos").push(newTodo).write();
+      this.db
+        .get('todos')
+        .push(newTodo)
+        .write();
 
       //Create Client
       this.todos.push(newTodo);
     },
     updateTodo(todo, value) {
-      this.db.get("todos").find({ id: todo.id }).assign(value).write();
+      this.db
+        .get('todos')
+        .find({ id: todo.id })
+        .assign(value)
+        .write();
 
       const foundTodo = _find(this.todos, { id: todo.id });
       _assign(foundTodo, value);
     },
     deleteTodo(todo) {
       //DB에서 삭제
-      this.db.get("todos").remove({ id: todo.id }).write();
+      this.db
+        .get('todos')
+        .remove({ id: todo.id })
+        .write();
 
       //lodash의 remove는 반응성을 가지지 못한다.
       // _remove(this.todos, { id: todo.id });
@@ -161,13 +180,13 @@ export default {
       this.$delete(this.todos, foundIndex);
     },
     changeFilter(filter) {
-      console.log("changeFilter 호출", filter);
+      console.log('changeFilter 호출', filter);
       this.filter = filter;
     },
     completeAll(checked) {
       //DB
       const newTodos = this.db
-        .get("todos")
+        .get('todos')
         .forEach((todo) => {
           todo.done = checked;
         })
@@ -209,12 +228,12 @@ export default {
     },
     scrollToTop() {
       scrollTo(0, 0, {
-        ease: "linear",
+        ease: 'linear',
       });
     },
     scrollToBottom() {
       scrollTo(0, document.body.scrollHeight, {
-        ease: "linear",
+        ease: 'linear',
       });
     },
   },
@@ -222,5 +241,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../scss/style"; /*SCSS Partials*/
+@import 'scss/style'; /*SCSS Partials*/
 </style>
