@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import Home from '@/views/Home';
-// import About from '@/views/About.vue';
+import About from '@/views/About.vue';
 import TodoApp from '@/views/TodoApp';
 
 Vue.use(VueRouter);
@@ -13,10 +13,10 @@ const routes = [
     path: '/',
     component: Home,
   },
-  // {
-  //   path: '/about',
-  //   component: About,
-  // },
+  {
+    path: '/about',
+    component: About,
+  },
   {
     path: '/todos',
     component: TodoApp,
