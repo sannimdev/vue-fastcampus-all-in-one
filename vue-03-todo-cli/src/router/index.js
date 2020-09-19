@@ -21,6 +21,7 @@ const routes = [
   },
   {
     name: 'todos',
+    redirect: '/todos/all',
     path: '/todos',
     component: TodoApp,
     children: [
