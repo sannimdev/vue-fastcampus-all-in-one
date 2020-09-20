@@ -1,24 +1,9 @@
-# vue-03-todo-cli
+# 할일 앱 실습
 
-## Project setup
-```
-npm install
-```
+- 1장: Vue 세팅 및 프로젝트 작성
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+- 2장: Style
 
-### Compiles and minifies for production
-```
-npm run build
-```
+- 3장: 라우팅
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- 4장: Vuex (상태관리 라이브러리)
