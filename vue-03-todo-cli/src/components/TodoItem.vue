@@ -105,10 +105,14 @@ export default {
     },
     updateTodo(value) {
       //이벤트명, 현재 todo객체, 어떠한 값이 업데이트될 것인지 값을 전달
-      this.$emit("update-todo", this.todo, value);
+      // this.$emit("update-todo", this.todo, value);
+      //AFTER: 이제 저장소에 직접 접근이 가능하다.
+      this.$store.dispatch("todoApp/updateTodo", { todo: this.todo, value });
     },
     deleteTodo() {
-      this.$emit("delete-todo", this.todo);
+      // this.$emit("delete-todo", this.todo);
+      //AFTER: 이제 저장소에 직접 접근이 가능하다.
+      this.$store.dispatch("todoApp/updateTodo", this.todo);
     },
   },
 };

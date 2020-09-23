@@ -13,8 +13,21 @@ export default {
   state: () => ({
     db: null,
     todos: [],
+    filter: 'all',
   }), //arrow function 문법으로 작성 //state도 data와 마찬가지로 함수여야 한다.
   getters: {
+    filteredTodos(state) {
+      console.log('filteredTodos 호출');
+      switch (state.filter) {
+        case 'all':
+        default:
+          return state.todos;
+        case 'active':
+          return state.todos.filter((todo) => !todo.done);
+        case 'completed':
+          return state.todos.filter((todo) => todo.done);
+      }
+    },
     total(state) {
       return state.todos.length;
     },
@@ -66,6 +79,9 @@ export default {
     updateTodo(state, { todo, key, value }) {
       todo[key] = value;
     },
+    updateFilter(state, filter) {
+      state.filter = filter;
+    },
   },
   actions: {
     //actions는 일반적인 logic을 처리할 수 있으나 데이터 변경이 불가능함 (=> mutations를 경유해야 함.)
@@ -88,7 +104,7 @@ export default {
           .write();
       }
     },
-    createTodo({ state, commit }, title) {
+    createTodo({ commit }, title) {
       const newTodo = {
         id: cryptoRandomString({ length: 10 }),
         title,
@@ -103,13 +119,13 @@ export default {
       //Create Client
       commit('pushTodo', newTodo);
     },
-    updateTodo({ state }, { todo, value }) {
+    updateTodo({ state, commit }, { todo, value }) {
       //Update DB
       commit('updateDB', { todo, value });
       const foundTodo = _find(state.todos, { id: todo.id });
       commit('assignTodo', { foundTodo, value });
     },
-    deleteTodo({ state }, todo) {
+    deleteTodo({ state, commit }, todo) {
       //DB에서 삭제
       commit('deleteDB', todo);
       //lodash의 remove는 반응성을 가지지 못한다.

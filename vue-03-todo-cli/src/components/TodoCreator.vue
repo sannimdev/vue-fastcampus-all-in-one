@@ -30,7 +30,8 @@ export default {
         this.title = this.title.trim();
         return;
       }
-      this.$emit("create-todo", this.title);
+      // this.$emit("create-todo", this.title); 이제 이벤트를 올릴 필요가 없이 저장소에 바로 접근이 가능하다
+      this.$store.dispatch("todoApp/createTodo", this.title);
       this.title = "";
 
       this.$nextTick(() => {

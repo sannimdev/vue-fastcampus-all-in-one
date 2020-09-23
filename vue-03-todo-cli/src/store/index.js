@@ -7,6 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   //strict: true, //배포 시에는 false, 개발 시에는 true
   strict: process.env.NODE_ENV !== 'production',
+  //연습용 데이터. index.js에 들어 있는 actions 등의 요소는 namespace가 필요하지 않다.
   modules: {
     todoApp,
   },

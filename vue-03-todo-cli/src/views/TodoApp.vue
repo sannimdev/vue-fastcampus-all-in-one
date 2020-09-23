@@ -29,19 +29,14 @@
       </div>
     </div>
     <div class="todo-app__list">
-      <TodoItem
-        v-for="todo in filteredTodos"
-        :key="todo.id"
-        :todo="todo"
-        @update-todo="updateTodo"
-        @delete-todo="deleteTodo"
-      />
+      <TodoItem v-for="todo in filteredTodos" :key="todo.id" :todo="todo" />
     </div>
-    <TodoCreator class="todo-app__creator" @create-todo="createTodo" />
+    <TodoCreator class="todo-app__creator" />
   </div>
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import scrollTo from "scroll-to";
 import TodoCreator from "@/components/TodoCreator";
 import TodoItem from "@/components/TodoItem";
@@ -52,18 +47,14 @@ export default {
     TodoItem,
   },
   computed: {
-    filteredTodos() {
-      console.log("filteredTodos 호출");
-      switch (this.$route.params.id) {
-        case "all":
-        default:
-          return this.todos;
-        case "active":
-          return this.todos.filter((todo) => !todo.done);
-        case "completed":
-          return this.todos.filter((todo) => todo.done);
-      }
-    },
+    // mapState, mapGetters를 Helpers라고 부른다.
+    ...mapState("todoApp", ["todos"]),
+    ...mapGetters("todoApp", [
+      "filteredTodos",
+      "total",
+      "activeCount",
+      "completedCount",
+    ]),
     allDone: {
       get() {
         return this.total === this.completedCount && this.total > 0;
@@ -73,10 +64,21 @@ export default {
       },
     },
   },
+  watch: {
+    //watch는 특정한 데이터의 변경을 살피다가 감지되면 실행하는 것
+    $route() {
+      // $route의 값이 변경되면 다음의 작업 수행
+      // state.filter = this.$route.params.id; state의 직접적인 변경은 허용되지 않아서 mutations의 도움을 받아야 한다.
+      // this.$store.commit("updateFilter", this.$route.params.id);
+      this.updateFilter(this.$route.params.id);
+    },
+  },
   created() {
     this.initDB();
   },
   methods: {
+    ...mapMutations("todoApp", ["updateFilter"]),
+    ...mapActions("todoApp", ["initDB", "completeAll", "clearCompleted"]),
     scrollToTop() {
       scrollTo(0, 0, {
         ease: "linear",
