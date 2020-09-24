@@ -151,7 +151,9 @@ export default {
           });
         })
         .write();
-      state.todos = _cloneDeep(newTodos);
+      // actions에서는 직접 데이터를 수정하는 작업을 수행할 수 없다.
+      // state.todos = _cloneDeep(newTodos);
+      commit('assignTodos', _cloneDeep(newTodos));
     },
     clearCompleted({ state, dispatch }) {
       _forEachRight(state.todos, (todo) => {
