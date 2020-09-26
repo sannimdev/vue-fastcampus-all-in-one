@@ -61,7 +61,9 @@ export default {
     deleteDB(state, todo) {
       state.db
         .get('todos')
-        .remove({ id: todo.id })
+        .remove({
+          id: todo.id,
+        })
         .write();
     },
     assignTodos(state, todos) {
