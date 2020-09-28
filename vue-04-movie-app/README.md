@@ -15,4 +15,10 @@
   - apikey: 키
   - page: 페이지 (10개 단위)
 
+## 1-3. API 사용 with 라이브러리
+
+- axios 사용
+
+  - npm i axios 또는 vue ui를 실행한 뒤 설치 (의존성)
+
 ===

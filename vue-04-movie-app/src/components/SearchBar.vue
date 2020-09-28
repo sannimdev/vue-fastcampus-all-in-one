@@ -22,17 +22,24 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
       title: '',
-      loading: false
+      loading: false,
     };
   },
   methods: {
     searchMovies() {
       console.log('searchMovies');
-    }
-  }
+      axios
+        .get(`http://www.omdbapi.com/?apikey=e2472a39&s=${this.title}`)
+        .then((res) => {
+          console.log(res);
+        });
+    },
+  },
 };
 </script>
