@@ -1,24 +1,18 @@
 # vue-04-movie-app
 
-## Project setup
-```
-npm install
-```
+# 1. OMDB API
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## 1-1. 가입 절차
 
-### Compiles and minifies for production
-```
-npm run build
-```
+1. [omdbapi.com](http://www.omdbapi.com/) 가입
+2. 이메일을 통해 키 수신
+3. 무료버전 기준 일 1000건 무료
 
-### Lints and fixes files
-```
-npm run lint
-```
+## 1-2. Rest API
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- https://www.omdbapi.com/?s=[검색어]&apikey=[키]&page=[페이지]
+  - s: 검색어
+  - apikey: 키
+  - page: 페이지 (10개 단위)
+
+===
