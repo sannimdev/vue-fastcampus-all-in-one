@@ -33,12 +33,13 @@ export default {
   },
   methods: {
     searchMovies() {
-      console.log('searchMovies');
       axios
         .get(`http://www.omdbapi.com/?apikey=e2472a39&s=${this.title}`)
         .then((res) => {
           console.log(res);
         });
+
+      console.log('searchMovies');
     },
   },
 };
