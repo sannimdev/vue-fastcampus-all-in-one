@@ -32,14 +32,13 @@ export default {
     };
   },
   methods: {
-    searchMovies() {
-      axios
-        .get(`http://www.omdbapi.com/?apikey=e2472a39&s=${this.title}`)
-        .then((res) => {
-          console.log(res);
-        });
-
-      console.log('searchMovies');
+    async searchMovies() {
+      this.loading = true;
+      const res = await axios.get(
+        `http://www.omdbapi.com/?apikey=e2472a39&s=${this.title}`
+      );
+      this.loading = false;
+      console.log(res);
     },
   },
 };
