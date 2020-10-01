@@ -22,23 +22,35 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { mapActions } from 'vuex';
 
 export default {
   data() {
-    return {
-      title: '',
-      loading: false,
-    };
+    return {};
+  },
+  computed: {
+    title: {
+      //Getter
+      get() {
+        return this.$store.state.movie.title;
+      },
+      //Setter
+      set(title) {
+        this.$store.commit('movie/updateState', { title });
+      },
+    },
+    /*[Vue warn]: Computed property "title" was assigned to but it has no setter. */
+    // title() {
+    //   return this.$store.state.movie.title;
+    // },
+    loading() {
+      return this.$store.state.movie.loading;
+    },
   },
   methods: {
+    ...mapActions('movie', ['searchMovies']),
     async searchMovies() {
-      this.loading = true;
-      const res = await axios.get(
-        `http://www.omdbapi.com/?apikey=e2472a39&s=${this.title}`
-      );
-      this.loading = false;
-      console.log(res);
+      this.$store.dispatch('movie/searchMovies');
     },
   },
 };
