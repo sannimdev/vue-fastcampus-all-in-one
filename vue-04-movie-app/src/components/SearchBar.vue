@@ -25,9 +25,7 @@
 import { mapActions } from 'vuex';
 
 export default {
-  data() {
-    return {};
-  },
+  name: 'SearchBar',
   computed: {
     title: {
       //Getter
@@ -49,9 +47,6 @@ export default {
   },
   methods: {
     ...mapActions('movie', ['searchMovies']),
-    async searchMovies() {
-      this.$store.dispatch('movie/searchMovies');
-    },
   },
 };
 </script>
