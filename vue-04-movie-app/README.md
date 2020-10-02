@@ -1,5 +1,8 @@
 # vue-04-movie-app
 
+- DEMO: [Click Me](https://vue-movie-app-951ba.web.app/)
+- Firebase 호스팅 사용
+
 # 1. OMDB API
 
 ## 1-1. 가입 절차
