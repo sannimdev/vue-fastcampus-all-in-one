@@ -20,27 +20,28 @@ export default {
     }
   },
   actions: {
-    async searchMovies({ state, commit }) {
-      state.loading = true;
+    fetchMovies({ state, commit }, pageNum) {
+      // eslint-disable-next-line no-async-promise-executor
+      return new Promise(async resolve => {
+        const res = await axios.get(
+          `http://www.omdbapi.com/?apikey=e2472a39&s=${state.title}&page=${pageNum}`
+        );
+        commit('pushIntoMovies', res.data.Search);
+        resolve(res.data);
+      });
+    },
+    async searchMovies({ commit, dispatch }) {
       commit('updateState', {
         loading: true,
         movies: [] //초기화
       });
-      const res = await axios.get(
-        `http://www.omdbapi.com/?apikey=e2472a39&s=${state.title}&page=1`
-      );
-      commit('updateState', {
-        movies: res.data.Search
-      });
-      const pageLength = Math.ceil(res.data.totalResults / 10);
+      const { totalResults } = await dispatch('fetchMovies', 1);
+      const pageLength = Math.ceil(totalResults / 10);
       if (pageLength > 1) {
         //더 가지고 올 아이템이 존재
         for (let i = 2; i <= pageLength; i++) {
           if (i > 4) break; //최대 40개까지의 아이템만 가져오기
-          const resMore = await axios.get(
-            `http://www.omdbapi.com/?apikey=e2472a39&s=${state.title}&page=${i}`
-          );
-          commit('pushIntoMovies', resMore.data.Search);
+          await dispatch('fetchMovies', i);
         }
       }
       commit('updateState', {
