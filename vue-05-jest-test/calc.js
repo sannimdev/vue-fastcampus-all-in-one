@@ -1,5 +1,5 @@
 function addOne(a) {
-  return a + 1;
+  return parseInt(a, 10) + 1;
 }
 
 export { addOne };
