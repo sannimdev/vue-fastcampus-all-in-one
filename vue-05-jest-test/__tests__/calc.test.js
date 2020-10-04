@@ -17,4 +17,5 @@ expect(함수실행).toBe(기대되는 값)
 
 test("인수가 문자인 경우에는?", () => {
   expect(addOne("2")).toBe(3);
+  expect(addOne("77")).toBe(78);
 });
