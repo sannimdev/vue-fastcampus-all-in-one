@@ -51,3 +51,36 @@
 - afterEach: 모든 테스트 뒤에 한 번씩 실행
 - beforeAll: 모든 테스트의 가장 앞 부분에 한 번만 실행
 - beforeEach: 모든 테스트 앞에 한 번씩 실행
+
+```javascript
+import { addOne } from '../calc.js';
+
+describe(addOne, () => {
+  beforeAll(() => {
+    console.log('beforeAll');
+  });
+  afterAll(() => {
+    console.log('afterAll');
+  });
+  beforeEach(() => {
+    console.log('beforeEach');
+  });
+  afterEach(() => {
+    console.log('afterEach');
+  });
+
+  test('1', () => {
+    console.log('test1');
+  });
+  test('2', () => {
+    console.log('test2');
+  });
+});
+```
+
+위의 코드는 다음의 실행 순서로 동작한다.
+
+beforeAll
+→ beforeEach → test1 → afterEach
+→ beforeEach → test2 → afterEach
+→ afterAll
