@@ -19,4 +19,20 @@ describe("비동기", () => {
         */
     });
   });
+
+  test("then", () => {
+    //return을 하는 경우 반환할 때까지 기다려준다
+    return asyncFn().then(r => {
+      expect(r).toBe("Passes!");
+    });
+  });
+
+  test("resolves", () => {
+    return expect(asyncFn()).resolves.toBe("Passes!");
+  });
+
+  test("async/await", async () => {
+    const r = await asyncFn();
+    expect(r).toBe("Passes!");
+  });
 });
