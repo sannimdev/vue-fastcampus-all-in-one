@@ -43,7 +43,9 @@
 9. 다음에도 이 설정을 저장할 것이냐는 물음에는 N라고 답한다.
    ![과정9](assets/create-project-manually-select-features-09.png)
 
-## 3. API docs
+## 3. Jest API Docs
+
+### 3-1. Global
 
 - [API](https://jestjs.io/docs/en/api)
 
@@ -84,3 +86,9 @@ beforeAll
 → beforeEach → test1 → afterEach
 → beforeEach → test2 → afterEach
 → afterAll
+
+### 3-2. Using Matchers (일치하는지 확인)
+
+#### 자주 쓰는 Methods
+
+- .toBe(value)
